@@ -6,7 +6,7 @@ import { HistoryIcon } from "./icons/history-icon";
 
 export function GameTitle() {
   return (
-    <div className="pl-2 f">
+    <div className="pl-2">
       <Link
         href="#"
         className="flex items-center gap-2 text-xs text-teal-600 leading-tight -mb-0.5"

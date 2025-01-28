@@ -4,7 +4,7 @@ export function StatIcon() {
       width="12"
       height="13"
       viewBox="0 0 12 13"
-      fill="currentcolor"
+      fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path

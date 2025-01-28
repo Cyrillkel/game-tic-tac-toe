@@ -1,31 +1,11 @@
 import clsx from "clsx";
-import { ZeroIcon } from "./icons/zero-icon";
-import { CrossIcon } from "./icons/cross-icon";
 import { UiButton } from "../uikit/ui-button";
-import { useState } from "react";
-import { GAME_SYMBOL } from "./constants";
+
 import { GameSymbol } from "./game-symbol";
-
-const MOVE_ORDER = [
-  GAME_SYMBOL.CROSS,
-  GAME_SYMBOL.ZERO,
-  GAME_SYMBOL.TRIANGLE,
-  GAME_SYMBOL.SQUARE,
-];
-
-function GetNextMove(currentMove) {
-  const nextMoveIndex = MOVE_ORDER.indexOf(currentMove) + 1;
-  return MOVE_ORDER[nextMoveIndex] ?? MOVE_ORDER[0];
-}
+import { useGameState } from "./use-game-state";
 
 export function GameField({ className }) {
-  const [cells, setCells] = useState(() => new Array(19 * 19).fill(null));
-  const [currentMove, setCurrenMove] = useState(GAME_SYMBOL.CROSS);
-  const nextMove = GetNextMove(currentMove);
-  const handleCellClick = (index) => {
-    setCurrenMove((lastCurrentMove) => GetNextMove(lastCurrentMove));
-    console.log(lastCurrentMove);
-  };
+  const { cells, handleCellClick, currentMove, nextMove } = useGameState();
 
   const actions = (
     <>
@@ -39,7 +19,7 @@ export function GameField({ className }) {
   );
 
   return (
-    <GameFIeldLayout className={className}>
+    <GameFieldLayout className={className}>
       <GameMoveInfo
         actions={actions}
         currentMove={currentMove}
@@ -50,6 +30,7 @@ export function GameField({ className }) {
           return (
             <GameCell
               key={index}
+              symbol={cells[index]}
               onClick={() => {
                 handleCellClick(index);
               }}
@@ -57,22 +38,22 @@ export function GameField({ className }) {
           );
         })}
       </GameGrid>
-    </GameFIeldLayout>
+    </GameFieldLayout>
   );
 }
 
-function GameCell({ children, onClick }) {
+function GameCell({ symbol, onClick }) {
   return (
     <button
       onClick={onClick}
       className="border border-slate-200 -ml-px -mt-px flex items-center justify-center"
     >
-      {children}
+      {symbol && <GameSymbol symbol={symbol} className="w-5 h-5" />}
     </button>
   );
 }
 
-function GameFIeldLayout({ children, className }) {
+function GameFieldLayout({ children, className }) {
   return (
     <div
       className={clsx(

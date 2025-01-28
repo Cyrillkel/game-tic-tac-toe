@@ -4,3 +4,10 @@ export const GAME_SYMBOL = {
   TRIANGLE: "triangle",
   SQUARE: "square",
 };
+
+export const MOVE_ORDER = [
+  GAME_SYMBOL.ZERO,
+  GAME_SYMBOL.CROSS,
+  GAME_SYMBOL.TRIANGLE,
+  GAME_SYMBOL.SQUARE,
+];
