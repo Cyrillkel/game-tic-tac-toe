@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import { UiButton } from "../uikit/ui-button";
-
 import { GameSymbol } from "./game-symbol";
 import { useGameState } from "./use-game-state";
 
